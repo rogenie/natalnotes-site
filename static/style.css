@@ -282,3 +282,7 @@ p { margin: 0 0 1em; }
   .wordmark { font-size: 1rem; letter-spacing: .22em; }
 }
 @media (max-width: 400px) { .top-nav a[href="/sidereal-sign/"] { display: none; } }
+.cta-inline { display: grid; grid-template-columns: 64px 1fr; gap: 18px; align-items: center; margin: 28px 0; padding: 16px 18px; border-radius: 16px; border: 1px solid rgba(255,92,170,.4); background: rgba(255,92,170,.07); }
+.cta-cover { border-radius: 3px; box-shadow: 0 8px 18px rgba(0,0,0,.5); }
+.cta-inline p { margin: 0 0 10px; font-size: .95rem; color: var(--body); }
+.cta-inline .buy { padding: 9px 18px; font-size: .9rem; box-shadow: none; }

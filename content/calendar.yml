@@ -12,6 +12,7 @@
 # Google autocomplete research (content/keywords.md).
 
 - {on: 2026-11-22, kind: guide, slug: rahu-ketu-transit-2026-2028, status: published}
+- {on: 2026-11-22, kind: forecast, month: 2026-12, sign: virgo, status: published, note: "published on request; keyword: virgo horoscope december 2026"}
 - {on: 2026-11-24, kind: guide, slug: sidereal-vs-tropical-astrology, status: planned, keyword: "sidereal vs tropical which is more accurate"}
 - {on: 2026-11-26, kind: overview, month: 2026-12, status: planned, keyword: "vedic astrology december 2026"}
 - {on: 2026-11-28, kind: guide, slug: jupiter-transit-2027, status: planned, keyword: "jupiter transit 2027 vedic astrology"}

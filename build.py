@@ -399,8 +399,17 @@ def sign_strip(ym, current=None):
     return f'<nav class="sign-strip" aria-label="{esc(P.month_label(ym))} horoscopes by sign"><ul>' + "".join(items) + "</ul></nav>"
 
 
+def inline_cta(j):
+    return (f'<div class="cta-inline">{cover(j, "cta-cover")}<div><p><strong>The {esc(j["sign"])} Daily Journal.</strong> '
+            f'185 hardcover pages, an affirmation on every one. A place to write this month down.</p>'
+            f'{buy(j, f"Get the {j['sign']} journal on Amazon")}</div></div>')
+
+
 def build_post(p):
     body_html = P.render_md(p["body"])
+    jslug = p.get("sign") or p.get("journal")
+    if jslug:
+        body_html = body_html.replace("<p>{{buy}}</p>", inline_cta(BY[jslug]))
     if p["kind"] == "forecast":
         j = BY[p["sign"]]
         sky = SKY[p["month"]]

@@ -275,6 +275,9 @@ def positions_table(sky_m, esc, rising=None):
 
 def render_md(text):
     out = markdown.markdown(text, extensions=["extra", "sane_lists"])
+    # Amazon links are affiliate links: mark them sponsored and open them in a new tab.
+    out = re.sub(r'<a href="(https://(?:link\.amazon|www\.amazon\.com)[^"]*)"',
+                 r'<a href="\1" rel="sponsored noopener" target="_blank"', out)
     return out.replace("<table>", '<div class="table-wrap"><table class="sky">').replace("</table>", "</table></div>")
 
 
