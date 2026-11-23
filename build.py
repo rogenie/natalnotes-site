@@ -28,6 +28,7 @@ URL = cfg["url"].rstrip("/")
 SKY = P.load_sky(ROOT)
 POSTS = P.load_posts(ROOT, TODAY)
 LASTMOD = {}
+POST_PATHS = {p["path"] for p in POSTS}
 
 BOTS = ["Googlebot", "Bingbot", "GPTBot", "OAI-SearchBot", "ChatGPT-User", "PerplexityBot",
         "Perplexity-User", "ClaudeBot", "Claude-SearchBot", "Google-Extended", "Applebot",
@@ -107,6 +108,7 @@ def page(path, title, description, body, ld=(), kind="website", image=None, last
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
+<link rel="alternate" type="application/rss+xml" title="Natal Notes predictions" href="/feed.xml">
 {track}{lds}</head>
 <body>
 <header class="masthead">
@@ -120,6 +122,7 @@ def page(path, title, description, body, ld=(), kind="website", image=None, last
 </main>
 <footer class="foot">
   <div class="wrap">
+    {subscribe("foot") if path not in POST_PATHS else ""}
     <p class="foot-line">{esc(cfg['promise'])}</p>
     {socials('foot-social')}
     <nav class="foot-signs" aria-label="All twelve journals">{nav}</nav>
@@ -143,7 +146,24 @@ SITEMAP = []
 
 
 def finder(heading_tag="h2"):
-    data = json.dumps([{"s": j["sign"], "slug": j["slug"], "buy": j["buy"]} for j in J])
+    import re as _re
+    cal = yaml.safe_load((CONTENT / "calendar.yml").read_text()) or []
+
+    def plain(x):
+        return _re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", x).replace("**", "")
+
+    rows = []
+    for j in J:
+        f = latest_for(j["slug"])
+        nxt = next((c for c in cal if c.get("kind") == "forecast" and c.get("sign") == j["slug"]
+                    and c.get("status") == "planned"), None)
+        rows.append({"s": j["sign"], "slug": j["slug"], "buy": j["buy"],
+                     "f": ({"t": f["title"], "u": f["path"], "sum": [plain(x) for x in f.get("summary", [])][:4]} if f else None),
+                     "next": ({"on": str(nxt["date"]), "m": P.month_label(nxt["month"])} if nxt else None)})
+    evs = [{"d": e["date"], "w": P.describe(e), "s": e["sign"]}
+           for e in P.window_events(SKY, TODAY - dt.timedelta(days=1), TODAY + dt.timedelta(days=90))]
+    data = json.dumps(rows, ensure_ascii=False)
+    sky_json = json.dumps({"ev": evs, "house": P.HOUSE}, ensure_ascii=False)
     return f"""
 <section class="finder" id="finder" aria-labelledby="finder-h">
   <div class="wrap finder-inner">
@@ -165,17 +185,61 @@ def finder(heading_tag="h2"):
     <div class="finder-result" id="finder-result" aria-live="polite"><div class="placeholder"><span class="ph-cover"></span><span class="ph-cover"></span><p>Your sidereal Moon sign, your Sun signs, and the journal for each show up here.</p></div></div>
   </div>
   <script type="application/json" id="journal-data">{data}</script>
+  <script type="application/json" id="sky-data">{sky_json}</script>
   <script src="/finder.js" defer></script>
 </section>"""
+
+
+def excerpt(p, words=48):
+    import re as _re
+    first = p["body"].split("\n\n", 1)[0]
+    text = _re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", first).replace("**", "").strip()
+    w = text.split()
+    return " ".join(w[:words]) + ("…" if len(w) > words else "")
+
+
+KIND_LABEL = {"forecast": "Moon sign horoscope", "overview": "The month's sky", "guide": "Guide"}
+
+
+def post_card(p, big=False):
+    j = BY.get(p.get("sign") or p.get("journal") or "")
+    d = p["date"]
+    img = f'<a class="pc-img" href="{p["path"]}" tabindex="-1" aria-hidden="true">{cover(j, "pc-cover")}</a>' if j else ""
+    return (f'<article class="pcard{" big" if big else ""}">{img}<div class="pc-text">'
+            f'<p class="pc-kind">{KIND_LABEL[p["kind"]]} · {P.MONTHS[d.month - 1][:3]} {d.day}</p>'
+            f'<h3><a href="{p["path"]}">{esc(p["title"])}</a></h3>'
+            f'<p class="pc-ex">{esc(excerpt(p, 60 if big else 30))}</p>'
+            + (f'<a class="cta pc-go" href="{p["path"]}">Read the full forecast</a>' if big else "")
+            + "</div></article>")
 
 
 def latest_section():
     if not POSTS:
         return ""
-    return f"""<section class="latest" aria-labelledby="latest-h"><div class="wrap narrow">
-    <h2 id="latest-h">Sidereal horoscopes and guides</h2>
-    {post_list(list(reversed(POSTS))[:5])}
-    <p><a href="/sidereal-horoscope/">All sidereal horoscopes</a></p></div></section>"""
+    rec = list(reversed(POSTS))
+    feat = next((p for p in rec if p["kind"] == "forecast"), rec[0])
+    rest = [p for p in rec if p is not feat][:6]
+    return f"""<section class="latest" id="latest" aria-labelledby="latest-h"><div class="wrap">
+    <h2 id="latest-h">Latest predictions</h2>
+    <p class="section-sub">Every forecast is built from the real positions of the planets: exact dates, degrees, nakshatras, and the house each one lights up for your Moon sign.</p>
+    {post_card(feat, big=True)}
+    {('<div class="pc-grid">' + "".join(post_card(p) for p in rest) + "</div>") if rest else ""}
+    <p class="all-link"><a href="/sidereal-horoscope/">All sidereal horoscopes</a></p></div></section>"""
+
+
+def upcoming_sky(n=14):
+    """The next sky events from the build date; JS drops any that have passed and shows five."""
+    evs = P.window_events(SKY, TODAY, TODAY + dt.timedelta(days=75))
+    guides = [p for p in POSTS if p["kind"] == "guide"]
+    items = []
+    for e in evs[:n]:
+        names = {x.lower() for x in P.event_names(e)}
+        g = next((p for p in guides if any(x in p["slug"] for x in names)), None)
+        href = g["path"] if g else "/sidereal-horoscope/"
+        y, m, d = map(int, e["date"].split("-"))
+        items.append(f'<li data-date="{e["date"]}"><a href="{href}"><span class="ev-date"><b>{d}</b>{P.MONTHS[m - 1][:3]}</span>'
+                     f'<span class="ev-what">{esc(P.describe(e))}</span></a></li>')
+    return "".join(items)
 
 
 def build_home():
@@ -188,13 +252,20 @@ def build_home():
 <section class="hero">
   <div class="wrap hero-inner">
     <div class="hero-copy">
-      <h1>Your sign explains you.<br><span>Your journal changes you.</span></h1>
-      <p class="lede">Twelve hardcover Daily Journals, one for every sign. 185 pages, and every page opens with an affirmation, so the way you talk to yourself changes one morning at a time.</p>
-      <div class="hero-actions"><a class="cta" href="#finder">Find my journal</a><a class="ghost" href="#journals">See all twelve</a></div>
+      <h1>The real sky, read for <span>your Moon sign.</span></h1>
+      <p class="lede">Free sidereal (Vedic) horoscopes with the exact dates, degrees and houses, calculated from where the planets actually are. Then a journal to write your month down.</p>
+      <div class="hero-actions"><a class="cta" href="#latest">Read the latest prediction</a><a class="ghost" href="#finder">Find my Moon sign</a></div>
     </div>
-    <div class="fan" aria-hidden="true">{fan}</div>
+    <aside class="sky-now" aria-labelledby="sky-now-h">
+      <h2 id="sky-now-h">Coming up in the sky</h2>
+      <ol class="ev-list" id="ev-list">{upcoming_sky()}</ol>
+      <p class="sky-note">Sidereal positions, US Eastern dates. Tap one to see what it means for you.</p>
+    </aside>
   </div>
+  <script>(function(){{var t=new Date(),d=t.getFullYear()+"-"+String(t.getMonth()+1).padStart(2,"0")+"-"+String(t.getDate()).padStart(2,"0");document.querySelectorAll("#ev-list li").forEach(function(li){{if(li.dataset.date<d)li.remove();}});}})();</script>
 </section>
+{subscribe("hero")}
+{latest_section()}
 {finder()}
 <section class="shelf-section" id="journals" aria-labelledby="journals-h">
   <div class="wrap">
@@ -203,7 +274,6 @@ def build_home():
     <ul class="shelf">{shelf}</ul>
   </div>
 </section>
-{latest_section()}
 <section class="inside" aria-labelledby="inside-h">
   <div class="wrap inside-inner">
     <div class="page-mock" aria-hidden="true"><p class="page-aff">I powerfully attract what I want</p><span class="rule"></span><span class="rule"></span><span class="rule"></span><span class="rule"></span><span class="rule"></span><span class="rule"></span><span class="rule"></span></div>
@@ -381,6 +451,46 @@ def faq_html(faq):
         f"<h3>{esc(f['q'])}</h3><p>{esc(f['a'])}</p>" for f in faq) + "</section>"
 
 
+SIGN_OPTIONS = "".join(f'<option value="{j["sign"]}">{j["sign"]}</option>' for j in J)
+
+
+def subscribe(variant="inline", sign=None):
+    """Email sign-up (Kit form). Renders nothing until site.yml has subscribe_action."""
+    action = cfg.get("subscribe_action") or ""
+    if not action:
+        return ""
+    heads = {
+        "hero": ("Get your Moon sign's prediction the day it's published",
+                 "One email when a new forecast or big transit lands. Exact dates, the house it lights up for you, and a journal prompt. Free, unsubscribe anytime."),
+        "inline": (f"Get {sign}'s next prediction by email" if sign else "Get the next prediction by email",
+                   "We'll email you the moment the next forecast goes live. Free, no spam, unsubscribe anytime."),
+        "end": ("Don't miss next month", "Join free and get every new prediction for your Moon sign, plus eclipse and retrograde alerts before they hit."),
+        "foot": ("New predictions, straight to your inbox", "Free. One email per new forecast."),
+    }
+    h, sub = heads[variant]
+    opts = "".join(f'<option value="{j["sign"]}"{" selected" if sign == j["sign"] else ""}>{j["sign"]}</option>' for j in J)
+    return f"""
+<section class="subscribe sub-{variant}" aria-label="Subscribe for new predictions">
+  <div class="sub-copy"><h2>{esc(h)}</h2><p>{esc(sub)}</p></div>
+  <form class="sub-form" action="{esc(action)}" method="post" target="_blank">
+    <label class="sr" for="sub-email-{variant}">Email address</label>
+    <input id="sub-email-{variant}" type="email" name="email_address" placeholder="Your email" required autocomplete="email">
+    <label class="sr" for="sub-sign-{variant}">Your Moon sign</label>
+    <select id="sub-sign-{variant}" name="fields[moon_sign]"><option value="">My Moon sign</option>{opts}</select>
+    <button type="submit">Notify me</button>
+  </form>
+</section>"""
+
+
+def summary_box(p):
+    items = p.get("summary") or []
+    if not items:
+        return ""
+    head = "Your prediction in 30 seconds" if p["kind"] == "forecast" else "The quick read"
+    return ('<aside class="quick" aria-label="Summary"><h2>' + head + '</h2><ul>'
+            + "".join(f"<li>{P.render_md(x)[3:-4]}</li>" for x in items) + "</ul></aside>")
+
+
 def meta_line(p):
     d = p["date"]
     return (f'<p class="byline">By the Natal Notes team. Published {P.MONTHS[d.month - 1]} {d.day}, {d.year}. '
@@ -420,6 +530,7 @@ def build_post(p):
     jslug = p.get("sign") or p.get("journal")
     if jslug:
         body_html = body_html.replace("<p>{{buy}}</p>", inline_cta(BY[jslug]))
+    body_html = body_html.replace("<p>{{subscribe}}</p>", subscribe("inline", BY[p["sign"]]["sign"] if p.get("sign") else None))
     if p["kind"] == "forecast":
         j = BY[p["sign"]]
         label = P.month_label(p["month"])
@@ -462,7 +573,10 @@ def build_post(p):
     {crumbs(items)}
     <h1>{esc(p['title'])}</h1>
     {meta_line(p)}
+    {summary_box(p)}
+    {subscribe("inline", BY[p["sign"]]["sign"] if p.get("sign") else None)}
     <div class="prose">{body_html}</div>
+    {subscribe("end", BY[p["sign"]]["sign"] if p.get("sign") else None)}
     {extra}
   </div>
 </article>"""
@@ -544,6 +658,13 @@ def build_files():
         lines += ["", "## Sidereal horoscopes and guides", ""]
         lines += [f"- [{p['title']}]({URL}{p['path']}): {p['description']}" for p in reversed(POSTS)]
     (OUT / "llms.txt").write_text("\n".join(lines) + "\n")
+    items = "".join(
+        f"<item><title>{esc(p['title'])}</title><link>{URL}{p['path']}</link><guid>{URL}{p['path']}</guid>"
+        f"<pubDate>{dt.datetime(p['date'].year, p['date'].month, p['date'].day, 12).strftime('%a, %d %b %Y %H:%M:%S +0000')}</pubDate>"
+        f"<description>{esc(p['description'])}</description></item>" for p in reversed(POSTS))
+    (OUT / "feed.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<rss version="2.0"><channel>'
+                                  f"<title>Natal Notes: sidereal horoscopes</title><link>{URL}/</link>"
+                                  f"<description>{esc(cfg['description'])}</description><language>en</language>{items}</channel></rss>\n")
     (OUT / "moon.svg").write_text(MOON.replace(' class="moon"', ' xmlns="http://www.w3.org/2000/svg"'))
     (OUT / ".nojekyll").write_text("")
     (OUT / "CNAME").write_text(cfg["custom_domain"] + "\n")

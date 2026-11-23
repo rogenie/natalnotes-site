@@ -156,7 +156,10 @@ def months_for(p, sky):
 
 def check_post(p, sky):
     errs = []
-    text = p["body"] + "\n" + "\n".join(f"{f['q']} {f['a']}" for f in p.get("faq", [])) + "\n" + p["description"]
+    text = (p["body"] + "\n" + "\n".join(f"{f['q']} {f['a']}" for f in p.get("faq", [])) + "\n" + p["description"]
+            + "\n" + "\n".join(p.get("summary", [])))
+    if not 3 <= len(p.get("summary", [])) <= 5:
+        errs.append("needs a 3-5 line `summary:` (the quick read at the top of the article)")
     dates, degs, edges = sky_facts(sky, months_for(p, sky))
     if p["kind"] == "forecast":
         edges |= {d.isoformat() for d in window(p)}   # the forecast's own first and last day

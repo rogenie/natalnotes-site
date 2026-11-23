@@ -50,6 +50,10 @@ Description: 120-165 characters, the month's headline for that sign.
    (people search "<sign> new moon / full moon journal prompts"), and the sign's affirmation from journals.yml, word for word.
 7. Journal links: a link and a `{{buy}}` box right after the opening, a `{{buy}}` box mid-article, an inline link where
    journaling comes up naturally, and a closing "Write <Month> down" section with a link and `{{buy}}`.
+8. `summary:` in the front matter: 4-5 one-line bullets shown at the top as "Your prediction in 30 seconds"
+   (**The big theme:**, **Money:** or **Love:**, **Best days:**, **Go easy:**, and Sade Sati status). Same accuracy rules.
+9. Put `{{subscribe}}` on its own line about halfway through (an email sign-up box; sign-ups also appear automatically
+   at the top and end of every article).
 The page adds the key-dates table, planet table, journal box, FAQ, and links automatically. 3-5 FAQ entries,
 each a different follow-up ("Is January 2027 a good month for <Sign> to change jobs?").
 
@@ -59,11 +63,12 @@ with what each means collectively. The full events and positions tables are adde
 
 ## Guides (kind: guide)
 Answer one searched question (see keywords.md). Bold direct answer first, H2s as follow-up questions,
-a sign-by-sign section where it applies, one `practice` block, 3-5 FAQs.
+a sign-by-sign section (by Moon sign, then rising) where it applies, one `practice` block, 3-5 FAQs,
+a 3-5 bullet `summary:`, and `{{subscribe}}` halfway through.
 
 ## Publishing (scheduled task)
-One post per run, at most one every ~2 days (40-hour guard). Take the first `planned` calendar entry whose `on`
-date is today or earlier. Never backfill missed days, never publish two. Set the post's `date:` to today.
+One post per run, at most one every ~2 days (40-hour guard). Take the first `planned` calendar entry whose `date`
+is today or earlier. Never backfill missed days, never publish two. Set the post's `date:` to today.
 Generate sky data, write, run `python3 build.py` until it passes, check the page exists in `docs/`,
 mark the calendar entry `status: published`, commit `Publish: <title>`, push to main.
 Keep the calendar at least 6 weeks ahead: add the next month's overview, 12 forecasts (rotate sign order

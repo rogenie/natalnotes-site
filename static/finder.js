@@ -15,6 +15,36 @@
   var out = document.getElementById("finder-result");
   var rad = Math.PI / 180;
   var SIGNS = data.map(function (j) { return j.s; });
+  var SKY = { ev: [], house: {} };
+  try { SKY = JSON.parse(document.getElementById("sky-data").textContent); } catch (e) {}
+  var ORD = function (n) { return n + (n === 1 ? "st" : n === 2 ? "nd" : n === 3 ? "rd" : "th"); };
+  var MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  function todayIso() { var t = new Date(); return t.getFullYear() + "-" + String(t.getMonth() + 1).padStart(2, "0") + "-" + String(t.getDate()).padStart(2, "0"); }
+  function nice(iso) { var p = iso.split("-"); return MON[+p[1] - 1] + " " + (+p[2]); }
+
+  // The prediction panel: the latest forecast for this Moon sign, and the next sky events
+  // with the house each one lights up counted from that Moon.
+  function predict(idx) {
+    var j = data[idx], html = '<section class="predict"><p class="predict-kicker">Your prediction, ' + esc(j.s) + ' Moon</p>';
+    if (j.f) {
+      html += '<h3><a href="' + j.f.u + '">' + esc(j.f.t) + '</a></h3>';
+      if (j.f.sum && j.f.sum.length) html += '<ul>' + j.f.sum.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>";
+      html += '<a class="cta predict-go" href="' + j.f.u + '">Read my full prediction</a>';
+    } else {
+      html += '<h3>Your ' + esc(j.s) + ' forecast' + (j.next ? ' for ' + esc(j.next.m) + ' lands ' + esc(nice(j.next.on)) : ' is on its way') + '.</h3>' +
+        '<p>Here\'s what the sky is doing for you until then.</p>';
+    }
+    var today = todayIso(), up = SKY.ev.filter(function (e) { return e.d >= today; }).slice(0, 4);
+    if (up.length) {
+      html += '<p class="predict-sub">Coming up for a ' + esc(j.s) + ' Moon</p><ol class="predict-ev">' + up.map(function (e) {
+        var h = ((SIGNS.indexOf(e.s) - idx) % 12 + 12) % 12 + 1;
+        return '<li><span class="pe-date">' + nice(e.d) + '</span><span>' + esc(e.w) + ' <em>' + ORD(h) + ' house: ' + esc(SKY.house[h] || "") + '</em></span></li>';
+      }).join("") + "</ol>";
+    }
+    var sub = document.querySelector(".subscribe .sub-form");
+    if (sub) html += '<p class="predict-foot"><a href="#" data-sub="' + esc(j.s) + '">Email me ' + esc(j.s) + '\'s next prediction</a></p>';
+    return html + "</section>";
+  }
 
   function mod(a, n) { return ((a % n) + n) % n; }
 
@@ -152,12 +182,24 @@
       ? card("Sun sign, sidereal and tropical", t, edgeNote(sunT) || edgeNote(sunS))
       : card("Sidereal Sun, from the real sky", s, edgeNote(sunS)) + card("Tropical Sun, the usual horoscope", t, edgeNote(sunT));
 
-    out.innerHTML = '<p class="result-head">' + head + '</p><div class="result-grid">' + moonCard + sunCards + '</div>' +
+    var primary = hasTime || !change ? signOf(moonS) : null;
+    var pred = primary !== null ? predict(primary) : predict(change.from) + predict(change.to);
+    out.innerHTML = '<p class="result-head">' + head + '</p>' + pred + '<p class="predict-sub">Your journals</p><div class="result-grid">' + moonCard + sunCards + '</div>' +
       '<p class="result-foot">Your rising sign needs your birth time and birthplace; a full Vedic birth chart shows it.</p>';
     out.hidden = false;
     out.classList.remove("reveal"); void out.offsetWidth; out.classList.add("reveal");
+    if (window.innerWidth < 960) out.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
+  out.addEventListener("click", function (e) {
+    var a = e.target.closest("[data-sub]");
+    if (!a) return;
+    e.preventDefault();
+    var box = document.querySelector(".subscribe");
+    var sel = box && box.querySelector("select");
+    if (sel) sel.value = a.getAttribute("data-sub");
+    if (box) { box.scrollIntoView({ behavior: "smooth", block: "center" }); var i = box.querySelector("input"); if (i) i.focus({ preventScroll: true }); }
+  });
   button.addEventListener("click", show);
   [dateIn, timeIn].forEach(function (el) {
     el.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); show(); } });

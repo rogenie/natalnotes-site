@@ -20,3 +20,7 @@ sample_affirmations:
   - I am taking my power back
   - I deserve a love that makes me feel happy, not insecure
   - Today is the beginning of whatever I want.
+# Email sign-up: the "action" URL of a Kit form (Kit > Grow > Landing Pages & Forms > your form > Embed > HTML),
+# e.g. https://app.kit.com/forms/1234567/subscriptions. Leave blank and no sign-up boxes are shown.
+# Optional: add a custom field "moon_sign" in Kit so the Moon sign picker is saved.
+subscribe_action: ""
