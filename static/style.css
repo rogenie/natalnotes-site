@@ -225,3 +225,60 @@ p { margin: 0 0 1em; }
 @media (prefers-reduced-motion: reduce) {
   .shelf-link img, .cta, .buy { transition: none; }
 }
+
+/* ---------- Horoscopes, overviews and guides ---------- */
+.post { padding: 40px 0 24px; }
+.post h1 { margin-bottom: 10px; }
+.byline { font-size: .86rem; color: var(--soft); margin-bottom: 28px; }
+.prose > p:first-child { font-size: 1.12rem; color: var(--white); }
+.prose > p:first-child strong { font-weight: 500; }
+.prose h2 { margin-top: 1.6em; }
+.prose strong { color: var(--white); font-weight: 600; }
+.prose ul, .prose ol { padding-left: 1.3em; }
+.prose li { margin-bottom: .45em; }
+.prose blockquote { margin: 1.4em 0; padding: 4px 0 4px 18px; border-left: 2px solid var(--pink); color: var(--white); }
+.prose .practice, .pen { margin: 32px 0; padding: 22px 24px; border-radius: 16px; background: linear-gradient(150deg, rgba(255,92,170,.14), rgba(140,190,255,.06)); border: 1px solid rgba(255,92,170,.4); }
+.prose .practice h3 { margin-top: 0; color: var(--pink); }
+.prose .practice p:last-child { margin-bottom: 0; }
+.sky-block { margin-top: 40px; }
+.sky-block h2 { font-size: 1.45rem; }
+.sky { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.sky th, .sky td { text-align: left; padding: 9px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.sky thead th { color: var(--star); font-weight: 500; background: rgba(18,22,51,.75); white-space: nowrap; }
+.sky td:first-child, .sky tbody th { white-space: nowrap; color: var(--white); font-weight: 500; }
+.sky tr:last-child td, .sky tr:last-child th { border-bottom: 0; }
+.table-note { font-size: .84rem; color: var(--soft); }
+.jbox { display: grid; grid-template-columns: 120px 1fr; gap: 24px; align-items: center; margin: 44px 0; padding: 22px; border-radius: 18px; background: linear-gradient(160deg, rgba(18,22,51,.92), rgba(11,14,34,.92)); border: 1px solid var(--line); }
+.jbox-cover { border-radius: 4px; box-shadow: 0 14px 30px rgba(0,0,0,.55), 0 0 30px rgba(255,92,170,.2); }
+.jbox h2 { font-size: 1.35rem; margin-bottom: .3em; }
+.jbox-kicker { color: var(--star); font-size: .85rem; margin: 0 0 4px; }
+.jbox .buy { margin-top: 4px; padding: 10px 20px; font-size: .92rem; }
+.faq-mini { margin-top: 40px; }
+.faq-mini h2 { font-size: 1.45rem; }
+.more-links { margin-top: 40px; border-top: 1px solid var(--line); padding-top: 24px; }
+.more-links h2 { font-size: 1.25rem; }
+.sign-strip ul { list-style: none; padding: 0; margin: 0 0 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+.sign-strip a, .sign-strip span { display: inline-block; font-size: .88rem; padding: 6px 14px; border-radius: 999px; border: 1px solid rgba(140,190,255,.3); text-decoration: none; }
+.sign-strip a:hover { border-color: var(--pink); color: var(--pink); }
+.sign-strip [aria-current] { background: var(--pink); color: #14041a; border-color: var(--pink); font-weight: 600; }
+.sign-strip .soon { color: var(--soft); opacity: .55; border-style: dashed; }
+.month { margin-bottom: 28px; }
+.month h2 { font-size: 1.4rem; }
+.post-list { list-style: none; padding: 0; margin: 10px 0 20px; }
+.post-list li { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.post-list a { display: block; font-weight: 600; text-decoration: none; color: var(--white); }
+.post-list a:hover { color: var(--pink); }
+.post-list span { display: block; font-size: .9rem; color: var(--soft); margin-top: 2px; }
+.latest { padding: 48px 0 24px; border-top: 1px solid var(--line); }
+.forecast-link { padding: 12px 16px; border-radius: 12px; border: 1px solid var(--line); background: rgba(18,22,51,.6); font-size: .95rem; }
+@media (max-width: 600px) {
+  .jbox { grid-template-columns: 84px 1fr; gap: 16px; padding: 16px; }
+  .sky th, .sky td { padding: 8px 10px; }
+}
+@media (max-width: 600px) {
+  .brand-tag { display: none; }
+  .top-nav { gap: 14px; }
+  .top-nav a { font-size: .86rem; white-space: nowrap; }
+  .wordmark { font-size: 1rem; letter-spacing: .22em; }
+}
+@media (max-width: 400px) { .top-nav a[href="/sidereal-sign/"] { display: none; } }

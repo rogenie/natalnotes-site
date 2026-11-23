@@ -1,0 +1,661 @@
+{
+ "month": "2028-06",
+ "ayanamsa": "Lahiri",
+ "ayanamsa_deg": 24.254,
+ "node": "mean",
+ "timezone": "America/New_York",
+ "positions_start": {
+  "Sun": {
+   "sign": "Taurus",
+   "deg": 16.94,
+   "dms": "16°56'",
+   "nakshatra": "Rohini",
+   "pada": 3,
+   "nak_lord": "Moon",
+   "retrograde": false
+  },
+  "Moon": {
+   "sign": "Leo",
+   "deg": 28.18,
+   "dms": "28°10'",
+   "nakshatra": "Uttara Phalguni",
+   "pada": 1,
+   "nak_lord": "Sun",
+   "retrograde": false
+  },
+  "Mercury": {
+   "sign": "Taurus",
+   "deg": 18.38,
+   "dms": "18°22'",
+   "nakshatra": "Rohini",
+   "pada": 3,
+   "nak_lord": "Moon",
+   "retrograde": true
+  },
+  "Venus": {
+   "sign": "Taurus",
+   "deg": 17.34,
+   "dms": "17°20'",
+   "nakshatra": "Rohini",
+   "pada": 3,
+   "nak_lord": "Moon",
+   "retrograde": true
+  },
+  "Mars": {
+   "sign": "Taurus",
+   "deg": 1.0,
+   "dms": "0°59'",
+   "nakshatra": "Krittika",
+   "pada": 2,
+   "nak_lord": "Sun",
+   "retrograde": false
+  },
+  "Jupiter": {
+   "sign": "Leo",
+   "deg": 23.78,
+   "dms": "23°47'",
+   "nakshatra": "Purva Phalguni",
+   "pada": 4,
+   "nak_lord": "Venus",
+   "retrograde": false
+  },
+  "Saturn": {
+   "sign": "Aries",
+   "deg": 11.78,
+   "dms": "11°46'",
+   "nakshatra": "Ashwini",
+   "pada": 4,
+   "nak_lord": "Ketu",
+   "retrograde": false
+  },
+  "Rahu": {
+   "sign": "Capricorn",
+   "deg": 1.2,
+   "dms": "1°12'",
+   "nakshatra": "Uttara Ashadha",
+   "pada": 2,
+   "nak_lord": "Sun",
+   "retrograde": false
+  },
+  "Ketu": {
+   "sign": "Cancer",
+   "deg": 1.2,
+   "dms": "1°12'",
+   "nakshatra": "Punarvasu",
+   "pada": 4,
+   "nak_lord": "Jupiter",
+   "retrograde": false
+  },
+  "Uranus": {
+   "sign": "Taurus",
+   "deg": 15.85,
+   "dms": "15°50'",
+   "nakshatra": "Rohini",
+   "pada": 2,
+   "nak_lord": "Moon",
+   "retrograde": false
+  },
+  "Neptune": {
+   "sign": "Pisces",
+   "deg": 14.21,
+   "dms": "14°12'",
+   "nakshatra": "Uttara Bhadrapada",
+   "pada": 4,
+   "nak_lord": "Saturn",
+   "retrograde": false
+  },
+  "Pluto": {
+   "sign": "Capricorn",
+   "deg": 14.45,
+   "dms": "14°27'",
+   "nakshatra": "Shravana",
+   "pada": 2,
+   "nak_lord": "Moon",
+   "retrograde": true
+  }
+ },
+ "positions_mid": {
+  "Sun": {
+   "sign": "Gemini",
+   "deg": 1.28,
+   "dms": "1°17'",
+   "nakshatra": "Mrigashira",
+   "pada": 3,
+   "nak_lord": "Mars",
+   "retrograde": false
+  },
+  "Moon": {
+   "sign": "Pisces",
+   "deg": 12.08,
+   "dms": "12°04'",
+   "nakshatra": "Uttara Bhadrapada",
+   "pada": 3,
+   "nak_lord": "Saturn",
+   "retrograde": false
+  },
+  "Mercury": {
+   "sign": "Taurus",
+   "deg": 13.64,
+   "dms": "13°38'",
+   "nakshatra": "Rohini",
+   "pada": 2,
+   "nak_lord": "Moon",
+   "retrograde": false
+  },
+  "Venus": {
+   "sign": "Taurus",
+   "deg": 9.82,
+   "dms": "9°49'",
+   "nakshatra": "Krittika",
+   "pada": 4,
+   "nak_lord": "Sun",
+   "retrograde": true
+  },
+  "Mars": {
+   "sign": "Taurus",
+   "deg": 11.73,
+   "dms": "11°43'",
+   "nakshatra": "Rohini",
+   "pada": 1,
+   "nak_lord": "Moon",
+   "retrograde": false
+  },
+  "Jupiter": {
+   "sign": "Leo",
+   "deg": 24.89,
+   "dms": "24°53'",
+   "nakshatra": "Purva Phalguni",
+   "pada": 4,
+   "nak_lord": "Venus",
+   "retrograde": false
+  },
+  "Saturn": {
+   "sign": "Aries",
+   "deg": 13.37,
+   "dms": "13°22'",
+   "nakshatra": "Bharani",
+   "pada": 1,
+   "nak_lord": "Venus",
+   "retrograde": false
+  },
+  "Rahu": {
+   "sign": "Capricorn",
+   "deg": 0.41,
+   "dms": "0°24'",
+   "nakshatra": "Uttara Ashadha",
+   "pada": 2,
+   "nak_lord": "Sun",
+   "retrograde": false
+  },
+  "Ketu": {
+   "sign": "Cancer",
+   "deg": 0.41,
+   "dms": "0°24'",
+   "nakshatra": "Punarvasu",
+   "pada": 4,
+   "nak_lord": "Jupiter",
+   "retrograde": false
+  },
+  "Uranus": {
+   "sign": "Taurus",
+   "deg": 16.72,
+   "dms": "16°43'",
+   "nakshatra": "Rohini",
+   "pada": 3,
+   "nak_lord": "Moon",
+   "retrograde": false
+  },
+  "Neptune": {
+   "sign": "Pisces",
+   "deg": 14.47,
+   "dms": "14°27'",
+   "nakshatra": "Uttara Bhadrapada",
+   "pada": 4,
+   "nak_lord": "Saturn",
+   "retrograde": false
+  },
+  "Pluto": {
+   "sign": "Capricorn",
+   "deg": 14.26,
+   "dms": "14°15'",
+   "nakshatra": "Shravana",
+   "pada": 2,
+   "nak_lord": "Moon",
+   "retrograde": true
+  }
+ },
+ "positions_end": {
+  "Sun": {
+   "sign": "Gemini",
+   "deg": 15.6,
+   "dms": "15°35'",
+   "nakshatra": "Ardra",
+   "pada": 3,
+   "nak_lord": "Rahu",
+   "retrograde": false
+  },
+  "Moon": {
+   "sign": "Libra",
+   "deg": 7.2,
+   "dms": "7°12'",
+   "nakshatra": "Swati",
+   "pada": 1,
+   "nak_lord": "Rahu",
+   "retrograde": false
+  },
+  "Mercury": {
+   "sign": "Taurus",
+   "deg": 24.14,
+   "dms": "24°08'",
+   "nakshatra": "Mrigashira",
+   "pada": 1,
+   "nak_lord": "Mars",
+   "retrograde": false
+  },
+  "Venus": {
+   "sign": "Taurus",
+   "deg": 10.15,
+   "dms": "10°09'",
+   "nakshatra": "Rohini",
+   "pada": 1,
+   "nak_lord": "Moon",
+   "retrograde": false
+  },
+  "Mars": {
+   "sign": "Taurus",
+   "deg": 22.25,
+   "dms": "22°15'",
+   "nakshatra": "Rohini",
+   "pada": 4,
+   "nak_lord": "Moon",
+   "retrograde": false
+  },
+  "Jupiter": {
+   "sign": "Leo",
+   "deg": 26.55,
+   "dms": "26°33'",
+   "nakshatra": "Purva Phalguni",
+   "pada": 4,
+   "nak_lord": "Venus",
+   "retrograde": false
+  },
+  "Saturn": {
+   "sign": "Aries",
+   "deg": 14.74,
+   "dms": "14°44'",
+   "nakshatra": "Bharani",
+   "pada": 1,
+   "nak_lord": "Venus",
+   "retrograde": false
+  },
+  "Rahu": {
+   "sign": "Sagittarius",
+   "deg": 29.61,
+   "dms": "29°36'",
+   "nakshatra": "Uttara Ashadha",
+   "pada": 1,
+   "nak_lord": "Sun",
+   "retrograde": false
+  },
+  "Ketu": {
+   "sign": "Gemini",
+   "deg": 29.61,
+   "dms": "29°36'",
+   "nakshatra": "Punarvasu",
+   "pada": 3,
+   "nak_lord": "Jupiter",
+   "retrograde": false
+  },
+  "Uranus": {
+   "sign": "Taurus",
+   "deg": 17.55,
+   "dms": "17°33'",
+   "nakshatra": "Rohini",
+   "pada": 3,
+   "nak_lord": "Moon",
+   "retrograde": false
+  },
+  "Neptune": {
+   "sign": "Pisces",
+   "deg": 14.61,
+   "dms": "14°36'",
+   "nakshatra": "Uttara Bhadrapada",
+   "pada": 4,
+   "nak_lord": "Saturn",
+   "retrograde": false
+  },
+  "Pluto": {
+   "sign": "Capricorn",
+   "deg": 13.99,
+   "dms": "13°59'",
+   "nakshatra": "Shravana",
+   "pada": 2,
+   "nak_lord": "Moon",
+   "retrograde": true
+  }
+ },
+ "houses_start": {
+  "Aries": {
+   "Sun": 2,
+   "Mercury": 2,
+   "Venus": 2,
+   "Mars": 2,
+   "Jupiter": 5,
+   "Saturn": 1,
+   "Rahu": 10,
+   "Ketu": 4
+  },
+  "Taurus": {
+   "Sun": 1,
+   "Mercury": 1,
+   "Venus": 1,
+   "Mars": 1,
+   "Jupiter": 4,
+   "Saturn": 12,
+   "Rahu": 9,
+   "Ketu": 3
+  },
+  "Gemini": {
+   "Sun": 12,
+   "Mercury": 12,
+   "Venus": 12,
+   "Mars": 12,
+   "Jupiter": 3,
+   "Saturn": 11,
+   "Rahu": 8,
+   "Ketu": 2
+  },
+  "Cancer": {
+   "Sun": 11,
+   "Mercury": 11,
+   "Venus": 11,
+   "Mars": 11,
+   "Jupiter": 2,
+   "Saturn": 10,
+   "Rahu": 7,
+   "Ketu": 1
+  },
+  "Leo": {
+   "Sun": 10,
+   "Mercury": 10,
+   "Venus": 10,
+   "Mars": 10,
+   "Jupiter": 1,
+   "Saturn": 9,
+   "Rahu": 6,
+   "Ketu": 12
+  },
+  "Virgo": {
+   "Sun": 9,
+   "Mercury": 9,
+   "Venus": 9,
+   "Mars": 9,
+   "Jupiter": 12,
+   "Saturn": 8,
+   "Rahu": 5,
+   "Ketu": 11
+  },
+  "Libra": {
+   "Sun": 8,
+   "Mercury": 8,
+   "Venus": 8,
+   "Mars": 8,
+   "Jupiter": 11,
+   "Saturn": 7,
+   "Rahu": 4,
+   "Ketu": 10
+  },
+  "Scorpio": {
+   "Sun": 7,
+   "Mercury": 7,
+   "Venus": 7,
+   "Mars": 7,
+   "Jupiter": 10,
+   "Saturn": 6,
+   "Rahu": 3,
+   "Ketu": 9
+  },
+  "Sagittarius": {
+   "Sun": 6,
+   "Mercury": 6,
+   "Venus": 6,
+   "Mars": 6,
+   "Jupiter": 9,
+   "Saturn": 5,
+   "Rahu": 2,
+   "Ketu": 8
+  },
+  "Capricorn": {
+   "Sun": 5,
+   "Mercury": 5,
+   "Venus": 5,
+   "Mars": 5,
+   "Jupiter": 8,
+   "Saturn": 4,
+   "Rahu": 1,
+   "Ketu": 7
+  },
+  "Aquarius": {
+   "Sun": 4,
+   "Mercury": 4,
+   "Venus": 4,
+   "Mars": 4,
+   "Jupiter": 7,
+   "Saturn": 3,
+   "Rahu": 12,
+   "Ketu": 6
+  },
+  "Pisces": {
+   "Sun": 3,
+   "Mercury": 3,
+   "Venus": 3,
+   "Mars": 3,
+   "Jupiter": 6,
+   "Saturn": 2,
+   "Rahu": 11,
+   "Ketu": 5
+  }
+ },
+ "aspects_start": {
+  "Sun": [
+   "Scorpio"
+  ],
+  "Mercury": [
+   "Scorpio"
+  ],
+  "Venus": [
+   "Scorpio"
+  ],
+  "Mars": [
+   "Leo",
+   "Scorpio",
+   "Sagittarius"
+  ],
+  "Jupiter": [
+   "Sagittarius",
+   "Aquarius",
+   "Aries"
+  ],
+  "Saturn": [
+   "Gemini",
+   "Libra",
+   "Capricorn"
+  ]
+ },
+ "events": [
+  {
+   "type": "conjunction",
+   "bodies": [
+    "Sun",
+    "Venus"
+   ],
+   "sign": "Taurus",
+   "deg": 17.18,
+   "dms": "17°10'",
+   "nakshatra": "Rohini",
+   "pada": 3,
+   "nak_lord": "Moon",
+   "jd": 2461923.91683,
+   "date": "2028-06-01",
+   "time": "06:00",
+   "label": "June 1"
+  },
+  {
+   "type": "conjunction",
+   "bodies": [
+    "Sun",
+    "Mercury"
+   ],
+   "sign": "Taurus",
+   "deg": 17.85,
+   "dms": "17°50'",
+   "nakshatra": "Rohini",
+   "pada": 3,
+   "nak_lord": "Moon",
+   "jd": 2461924.61541,
+   "date": "2028-06-01",
+   "time": "22:46",
+   "label": "June 1"
+  },
+  {
+   "type": "full_moon",
+   "sign": "Scorpio",
+   "deg": 22.77,
+   "dms": "22°46'",
+   "nakshatra": "Jyeshtha",
+   "pada": 2,
+   "nak_lord": "Mercury",
+   "jd": 2461929.75612,
+   "date": "2028-06-07",
+   "time": "02:08",
+   "label": "June 7"
+  },
+  {
+   "type": "station",
+   "body": "Mercury",
+   "direction": "direct",
+   "sign": "Taurus",
+   "deg": 13.5,
+   "dms": "13°29'",
+   "nakshatra": "Rohini",
+   "pada": 2,
+   "nak_lord": "Moon",
+   "jd": 2461936.75452,
+   "date": "2028-06-14",
+   "time": "02:06",
+   "label": "June 14"
+  },
+  {
+   "type": "conjunction",
+   "bodies": [
+    "Venus",
+    "Mars"
+   ],
+   "sign": "Taurus",
+   "deg": 10.4,
+   "dms": "10°23'",
+   "nakshatra": "Rohini",
+   "pada": 1,
+   "nak_lord": "Moon",
+   "jd": 2461936.79044,
+   "date": "2028-06-14",
+   "time": "02:58",
+   "label": "June 14"
+  },
+  {
+   "type": "ingress",
+   "body": "Sun",
+   "sign": "Gemini",
+   "from": "Taurus",
+   "retrograde": false,
+   "jd": 2461937.32217,
+   "date": "2028-06-14",
+   "time": "15:43",
+   "label": "June 14"
+  },
+  {
+   "type": "conjunction",
+   "bodies": [
+    "Mercury",
+    "Mars"
+   ],
+   "sign": "Taurus",
+   "deg": 15.52,
+   "dms": "15°31'",
+   "nakshatra": "Rohini",
+   "pada": 2,
+   "nak_lord": "Moon",
+   "jd": 2461944.03513,
+   "date": "2028-06-21",
+   "time": "08:50",
+   "label": "June 21"
+  },
+  {
+   "type": "new_moon",
+   "sign": "Gemini",
+   "deg": 7.59,
+   "dms": "7°35'",
+   "nakshatra": "Ardra",
+   "pada": 1,
+   "nak_lord": "Rahu",
+   "jd": 2461945.26915,
+   "date": "2028-06-22",
+   "time": "14:27",
+   "label": "June 22"
+  },
+  {
+   "type": "station",
+   "body": "Venus",
+   "direction": "direct",
+   "sign": "Taurus",
+   "deg": 8.92,
+   "dms": "8°55'",
+   "nakshatra": "Krittika",
+   "pada": 4,
+   "nak_lord": "Sun",
+   "jd": 2461945.42773,
+   "date": "2028-06-22",
+   "time": "18:15",
+   "label": "June 22"
+  },
+  {
+   "type": "ingress",
+   "body": "Rahu",
+   "sign": "Sagittarius",
+   "from": "Capricorn",
+   "retrograde": true,
+   "jd": 2461946.33319,
+   "date": "2028-06-23",
+   "time": "15:59",
+   "label": "June 23"
+  },
+  {
+   "type": "ingress",
+   "body": "Ketu",
+   "sign": "Gemini",
+   "from": "Cancer",
+   "retrograde": true,
+   "jd": 2461946.33319,
+   "date": "2028-06-23",
+   "time": "15:59",
+   "label": "June 23"
+  },
+  {
+   "type": "conjunction",
+   "bodies": [
+    "Mercury",
+    "Mars"
+   ],
+   "sign": "Taurus",
+   "deg": 18.37,
+   "dms": "18°22'",
+   "nakshatra": "Rohini",
+   "pada": 3,
+   "nak_lord": "Moon",
+   "jd": 2461948.10174,
+   "date": "2028-06-25",
+   "time": "10:26",
+   "label": "June 25"
+  }
+ ]
+}

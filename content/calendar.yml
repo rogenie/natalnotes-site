@@ -1,0 +1,61 @@
+# Natal Notes publishing calendar: one post every other day, never more than one per run.
+# The scheduled task publishes the first entry whose `on` date is today or earlier and whose
+# status is planned, as long as nothing was published in the last 40 hours. Missed days are
+# never backfilled: if a run is missed, the next run publishes one item and the rest slide.
+#
+# Monthly rhythm (keeps each month's forecasts live before the month starts):
+#   overview for month M   ~28 days before M
+#   12 sign forecasts      every other day after that, finishing a few days before M
+#   guides                 fill the 1-2 leftover slots each month
+# Sign order rotates by one each month so no sign is always last.
+# kinds: guide (slug), overview (month), forecast (month + sign). Keywords come from
+# Google autocomplete research (content/keywords.md).
+
+- {on: 2026-11-22, kind: guide, slug: rahu-ketu-transit-2026-2028, status: published}
+- {on: 2026-11-24, kind: guide, slug: sidereal-vs-tropical-astrology, status: planned, keyword: "sidereal vs tropical which is more accurate"}
+- {on: 2026-11-26, kind: overview, month: 2026-12, status: planned, keyword: "vedic astrology december 2026"}
+- {on: 2026-11-28, kind: guide, slug: jupiter-transit-2027, status: planned, keyword: "jupiter transit 2027 vedic astrology"}
+- {on: 2026-11-30, kind: guide, slug: how-to-read-a-sidereal-horoscope, status: planned, keyword: "what is my sidereal rising sign / moon sign horoscope"}
+- {on: 2026-12-02, kind: guide, slug: saturn-transit-2027-aries, status: planned, keyword: "saturn transit 2027 vedic astrology"}
+- {on: 2026-12-04, kind: overview, month: 2027-01, status: planned, keyword: "vedic astrology january 2027"}
+- {on: 2026-12-06, kind: forecast, month: 2027-01, sign: scorpio, status: planned}
+- {on: 2026-12-08, kind: forecast, month: 2027-01, sign: leo, status: planned}
+- {on: 2026-12-10, kind: forecast, month: 2027-01, sign: cancer, status: planned}
+- {on: 2026-12-12, kind: forecast, month: 2027-01, sign: pisces, status: planned}
+- {on: 2026-12-14, kind: forecast, month: 2027-01, sign: virgo, status: planned}
+- {on: 2026-12-16, kind: forecast, month: 2027-01, sign: aries, status: planned}
+- {on: 2026-12-18, kind: forecast, month: 2027-01, sign: libra, status: planned}
+- {on: 2026-12-20, kind: forecast, month: 2027-01, sign: sagittarius, status: planned}
+- {on: 2026-12-22, kind: forecast, month: 2027-01, sign: capricorn, status: planned}
+- {on: 2026-12-24, kind: forecast, month: 2027-01, sign: gemini, status: planned}
+- {on: 2026-12-26, kind: forecast, month: 2027-01, sign: taurus, status: planned}
+- {on: 2026-12-28, kind: forecast, month: 2027-01, sign: aquarius, status: planned}
+- {on: 2026-12-30, kind: guide, slug: mars-retrograde-2027-sidereal, status: planned, keyword: "mars retrograde 2027 vedic / sidereal leo"}
+- {on: 2027-01-01, kind: guide, slug: eclipses-2027-vedic-astrology, status: planned, keyword: "eclipse 2027 vedic astrology"}
+- {on: 2027-01-03, kind: overview, month: 2027-02, status: planned, keyword: "vedic astrology february 2027"}
+- {on: 2027-01-05, kind: forecast, month: 2027-02, sign: leo, status: planned}
+- {on: 2027-01-07, kind: forecast, month: 2027-02, sign: cancer, status: planned}
+- {on: 2027-01-09, kind: forecast, month: 2027-02, sign: pisces, status: planned}
+- {on: 2027-01-11, kind: forecast, month: 2027-02, sign: virgo, status: planned}
+- {on: 2027-01-13, kind: forecast, month: 2027-02, sign: aries, status: planned}
+- {on: 2027-01-15, kind: forecast, month: 2027-02, sign: libra, status: planned}
+- {on: 2027-01-17, kind: forecast, month: 2027-02, sign: sagittarius, status: planned}
+- {on: 2027-01-19, kind: forecast, month: 2027-02, sign: capricorn, status: planned}
+- {on: 2027-01-21, kind: forecast, month: 2027-02, sign: gemini, status: planned}
+- {on: 2027-01-23, kind: forecast, month: 2027-02, sign: taurus, status: planned}
+- {on: 2027-01-25, kind: forecast, month: 2027-02, sign: aquarius, status: planned}
+- {on: 2027-01-27, kind: forecast, month: 2027-02, sign: scorpio, status: planned}
+- {on: 2027-01-29, kind: guide, slug: mercury-retrograde-2027-sidereal, status: planned, keyword: "mercury retrograde 2027 vedic"}
+- {on: 2027-01-31, kind: overview, month: 2027-03, status: planned, keyword: "vedic astrology march 2027"}
+- {on: 2027-02-02, kind: forecast, month: 2027-03, sign: cancer, status: planned}
+- {on: 2027-02-04, kind: forecast, month: 2027-03, sign: pisces, status: planned}
+- {on: 2027-02-06, kind: forecast, month: 2027-03, sign: virgo, status: planned}
+- {on: 2027-02-08, kind: forecast, month: 2027-03, sign: aries, status: planned}
+- {on: 2027-02-10, kind: forecast, month: 2027-03, sign: libra, status: planned}
+- {on: 2027-02-12, kind: forecast, month: 2027-03, sign: sagittarius, status: planned}
+- {on: 2027-02-14, kind: forecast, month: 2027-03, sign: capricorn, status: planned}
+- {on: 2027-02-16, kind: forecast, month: 2027-03, sign: gemini, status: planned}
+- {on: 2027-02-18, kind: forecast, month: 2027-03, sign: taurus, status: planned}
+- {on: 2027-02-20, kind: forecast, month: 2027-03, sign: aquarius, status: planned}
+- {on: 2027-02-22, kind: forecast, month: 2027-03, sign: scorpio, status: planned}
+- {on: 2027-02-24, kind: forecast, month: 2027-03, sign: leo, status: planned}
