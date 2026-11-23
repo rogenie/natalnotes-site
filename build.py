@@ -16,6 +16,7 @@ from pathlib import Path
 import yaml
 
 import posts as P
+import sky as SKYCALC
 
 ROOT = Path(__file__).parent
 CONTENT, STATIC, OUT = ROOT / "content", ROOT / "static", ROOT / "docs"
@@ -148,14 +149,20 @@ def finder(heading_tag="h2"):
   <div class="wrap finder-inner">
     <div class="finder-copy">
       <{heading_tag} id="finder-h">What's your real sign?</{heading_tag}>
-      <p>Most horoscopes use the tropical zodiac, fixed to the seasons. Sidereal astrology uses where the
-      constellations actually sit in the sky today, about 24 degrees away. Enter your birthday to see both.</p>
+      <p>Vedic astrology reads your <strong>Moon sign</strong> first: it's the sign people mean in India when they say "my sign", and the one monthly horoscopes are written for. Add your birth time to find yours, along with your sidereal and tropical Sun signs.</p>
       <form class="finder-form" onsubmit="return false">
         <label for="bday">Your birthday</label>
-        <div class="finder-row"><input id="bday" type="date" min="1900-01-01" max="2030-12-31" required><button type="submit" id="bday-go">Show my signs</button></div>
+        <input id="bday" class="finder-input" type="date" min="1900-01-01" max="2030-12-31" required>
+        <div class="finder-two">
+          <div><label for="btime">Birth time <span class="opt">optional</span></label>
+          <input id="btime" class="finder-input" type="time"></div>
+          <div><label for="bzone">Born in time zone</label>
+          <select id="bzone" class="finder-input"></select></div>
+        </div>
+        <button type="submit" id="bday-go" class="finder-go">Show my signs</button>
       </form>
     </div>
-    <div class="finder-result" id="finder-result" aria-live="polite"><div class="placeholder"><span class="ph-cover"></span><span class="ph-cover"></span><p>Your sidereal and tropical signs, and the journal for each, show up here.</p></div></div>
+    <div class="finder-result" id="finder-result" aria-live="polite"><div class="placeholder"><span class="ph-cover"></span><span class="ph-cover"></span><p>Your sidereal Moon sign, your Sun signs, and the journal for each show up here.</p></div></div>
   </div>
   <script type="application/json" id="journal-data">{data}</script>
   <script src="/finder.js" defer></script>
@@ -218,8 +225,8 @@ def build_home():
     <h2 id="faq-h">Questions</h2>
     <h3>Is this a guided workbook?</h3>
     <p>No. Each page gives you one affirmation and room to write. No homework, no fill-in-the-blanks. The sign pages on this site give you a prompt if you want one.</p>
-    <h3>Should I get my tropical sign or my sidereal sign?</h3>
-    <p>Natal Notes reads the sky sidereally, so we'd start with your sidereal sign. But if your tropical sign is the one you've always recognized yourself in, that's the one to write with. Use the finder above to see both.</p>
+    <h3>Which sign's journal should I get?</h3>
+    <p>Natal Notes reads the sky sidereally, the Vedic way, where your Moon sign counts most, so that's a great place to start. But if your Sun sign is the one you've always recognized yourself in, write with that one. The finder above shows your Moon sign and both Sun signs.</p>
     <h3>Where do I buy it?</h3>
     <p>Every journal is printed and shipped by Amazon. The buttons on this site go straight to its Amazon page.</p>
     <h3>Will affirmations change my life?</h3>
@@ -307,7 +314,7 @@ def build_sidereal():
 <div class="wrap narrow side-head">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Natal Notes</a> / <span>Your real sign</span></nav>
   <h1>What's my sidereal sign?</h1>
-  <p class="lede">Your sidereal sun sign is usually the sign before the one you grew up with. Enter your birthday below to see your tropical and sidereal signs side by side.</p>
+  <p class="lede">In Vedic (sidereal) astrology, the sign that matters most is your Moon sign. Enter your birthday and birth time to find it, plus your sidereal Sun sign, which is usually the sign before the one you grew up with.</p>
 </div>
 {finder("h2")}
 <div class="wrap narrow side-body">
@@ -317,14 +324,17 @@ def build_sidereal():
   <h2>Sidereal and tropical dates for every sign</h2>
   <div class="table-wrap"><table class="dates"><thead><tr><th scope="col">Sign</th><th scope="col">Tropical</th><th scope="col">Sidereal</th></tr></thead><tbody>{rows}</tbody></table></div>
   <p class="date-note">Dates are approximate and shift by a day or so from year to year. Born within a day of a change? Your birth time decides it, so check a full birth chart.</p>
-  <h2>Which one is right?</h2>
+  <h2>Why does Vedic astrology use the Moon sign?</h2>
+  <p>In Vedic astrology the Moon stands for the mind, so your Moon sign (your rashi) is how you feel and react day to day. It's what people in India usually mean by "my sign", monthly horoscopes there are written by Moon sign, and transits are traditionally counted from the natal Moon. Your rising sign is the foundation of the whole birth chart, and the Sun sign matters least. Our <a href="/sidereal-horoscope/">monthly horoscopes</a> are written for your Moon sign first and your rising sign second.</p>
+  <h2>Which zodiac is right?</h2>
   <p>Both are real systems with long histories, and astrologers disagree about which to use. We read the sky sidereally, and our monthly forecasts use the sidereal zodiac. Use the sign that helps you see yourself more clearly.</p>
 </div>"""
-    faq = [{"q": "What is a sidereal sign?", "a": "Your sidereal sign is the zodiac sign the Sun was in at your birth, measured against where the constellations actually sit in the sky, rather than against the seasons."},
+    faq = [{"q": "What is my Moon sign in Vedic astrology?", "a": "It's the sidereal sign the Moon was in when you were born. The Moon changes sign every two to two and a half days, so you need your birth time and time zone to be sure. Vedic astrology treats it as your main sign."},
+           {"q": "What is a sidereal sign?", "a": "Your sidereal sign is the zodiac sign the Sun was in at your birth, measured against where the constellations actually sit in the sky, rather than against the seasons."},
            {"q": "Why is my sidereal sign different?", "a": "The tropical and sidereal zodiacs have drifted about 24 degrees apart because of the slow wobble of the Earth's axis, so most people's sidereal sign is the sign before their tropical one."}]
     ld = [{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": f["q"], "acceptedAnswer": {"@type": "Answer", "text": f["a"]}} for f in faq]}]
-    page("/sidereal-sign/", "What's my sidereal sign? Sidereal vs tropical zodiac",
-         "Find your sidereal sun sign from your birthday, see sidereal and tropical dates for all twelve signs, and learn why the two zodiacs differ by about 24 degrees.", body, ld)
+    page("/sidereal-sign/", "What's my sidereal sign? Vedic Moon sign and Sun sign finder",
+         "Find your Vedic Moon sign and sidereal Sun sign from your birth date and time, see sidereal and tropical dates for every sign, and why Vedic astrology reads the Moon.", body, ld)
 
 
 def crumbs(items):
@@ -412,17 +422,20 @@ def build_post(p):
         body_html = body_html.replace("<p>{{buy}}</p>", inline_cta(BY[jslug]))
     if p["kind"] == "forecast":
         j = BY[p["sign"]]
-        sky = SKY[p["month"]]
         label = P.month_label(p["month"])
+        ws, we = P.window(p)
+        span = P.window_label(ws, we)
+        events = P.window_events(SKY, ws, we)
+        pos = SKYCALC.positions(SKYCALC.jd_of(dt.datetime(ws.year, ws.month, ws.day, tzinfo=SKYCALC.TZ)))
         items = [("Natal Notes", "/"), ("Sidereal horoscopes", "/sidereal-horoscope/"),
                  (j["sign"], f"/sidereal-horoscope/{j['slug']}/"), (label, None)]
         ov = by_month().get(p["month"], {}).get("overview")
         prev = [q for q in POSTS if q["kind"] == "forecast" and q["sign"] == p["sign"] and q["month"] < p["month"]]
         extra = f"""
-  <section class="sky-block"><h2>Key dates for {esc(j['sign'])} rising, {esc(label)}</h2>
-  <p class="table-note">Each date shows the house it lights up when {esc(j['sign'])} is your rising sign. Reading for your moon sign? The same table works if your moon is in {esc(j['sign'])}.</p>
-  {P.key_dates(sky, j['sign'], esc)}</section>
-  <section class="sky-block"><h2>Where the planets sit for {esc(j['sign'])}</h2>{P.positions_table(sky, esc, j['sign'])}</section>
+  <section class="sky-block"><h2>Key dates for a {esc(j['sign'])} Moon, {esc(span)}</h2>
+  <p class="table-note">Each date shows the house it lights up counted from a {esc(j['sign'])} Moon, the way Vedic astrology reads transits. Have {esc(j['sign'])} rising? Read the same houses from your ascendant too. <a href="/sidereal-sign/">Find your Moon sign</a>.</p>
+  {P.key_dates(events, j['sign'], esc)}</section>
+  <section class="sky-block"><h2>Where the planets sit for {esc(j['sign'])}</h2>{P.positions_table(pos, esc, j['sign'], f"{P.MONTHS[ws.month - 1]} {ws.day}, {ws.year}")}</section>
   {journal_box(j)}
   {faq_html(p['faq'])}
   <section class="more-links"><h2>{esc(label)} for every sign</h2>{sign_strip(p['month'], j['slug'])}
@@ -435,7 +448,7 @@ def build_post(p):
         items = [("Natal Notes", "/"), ("Sidereal horoscopes", "/sidereal-horoscope/"), (f"Vedic astrology {label}", None)]
         extra = f"""
   <section class="sky-block"><h2>Every planetary date in {esc(label)}</h2>{P.all_dates(sky, esc)}</section>
-  <section class="sky-block"><h2>Planet positions on {esc(label.split()[0])} 1</h2>{P.positions_table(sky, esc)}</section>
+  <section class="sky-block"><h2>Planet positions on {esc(label.split()[0])} 1</h2>{P.positions_table(sky["positions_start"], esc)}</section>
   <section class="more-links"><h2>{esc(label)} horoscope for your sign</h2>{sign_strip(p['month'])}</section>
   {faq_html(p['faq'])}"""
         image = None
@@ -480,7 +493,7 @@ def build_posts():
 <div class="wrap narrow side-head">
   {crumbs([("Natal Notes", "/"), ("Sidereal horoscopes", None)])}
   <h1>Sidereal horoscopes</h1>
-  <p class="lede">Monthly sidereal (Vedic) forecasts for every sign, built from the real positions of the planets: the exact dates, degrees and nakshatras, and the house each one lights up for you. Read yours for your rising sign first, then your moon sign.</p>
+  <p class="lede">Monthly sidereal (Vedic) forecasts for every sign, built from the real positions of the planets: the exact dates, degrees and nakshatras, and the house each one lights up for you. Read yours for your Moon sign first, the way Vedic astrology reads transits, then for your rising sign.</p>
 </div>
 <div class="wrap narrow side-body">
   {''.join(sections)}
@@ -496,15 +509,15 @@ def build_posts():
         body = f"""
 <div class="wrap narrow side-head">
   {crumbs(items)}
-  <h1>{esc(j['sign'])} sidereal horoscope</h1>
-  <p class="lede">Monthly sidereal (Vedic) forecasts for {esc(j['sign'])}. In the sidereal zodiac the Sun is in {esc(j['sign'])} roughly {esc(j['sidereal'])}, but these forecasts read best for {esc(j['sign'])} rising or a {esc(j['sign'])} moon.</p>
+  <h1>{esc(j['sign'])} Moon sign horoscope</h1>
+  <p class="lede">Monthly sidereal (Vedic) forecasts for {esc(j['sign'])}. In the sidereal zodiac the Sun is in {esc(j['sign'])} roughly {esc(j['sidereal'])}, but in Vedic astrology your Moon sign matters most, so these forecasts are written for a {esc(j['sign'])} Moon first and {esc(j['sign'])} rising second.</p>
 </div>
 <div class="wrap narrow side-body">
   {post_list(reversed(fs))}
   {journal_box(j)}
 </div>"""
-        page(f"/sidereal-horoscope/{j['slug']}/", f"{j['sign']} sidereal horoscope: monthly Vedic forecast",
-             f"Every monthly sidereal horoscope for {j['sign']} rising and {j['sign']} moon: exact planetary dates, degrees, nakshatras and houses, from the Natal Notes team.",
+        page(f"/sidereal-horoscope/{j['slug']}/", f"{j['sign']} Moon sign horoscope: monthly sidereal Vedic forecast",
+             f"Every monthly sidereal horoscope for a {j['sign']} Moon sign and {j['sign']} rising: exact planetary dates, degrees, nakshatras and houses, from the Natal Notes team.",
              body, [crumb_ld(items, f"/sidereal-horoscope/{j['slug']}/")], image=f"{URL}/covers/{j['slug']}.jpg")
     if guides:
         page("/guides/", "Sidereal astrology guides",

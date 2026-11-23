@@ -46,14 +46,20 @@
   <div class="wrap finder-inner">
     <div class="finder-copy">
       <h2 id="finder-h">What's your real sign?</h2>
-      <p>Most horoscopes use the tropical zodiac, fixed to the seasons. Sidereal astrology uses where the
-      constellations actually sit in the sky today, about 24 degrees away. Enter your birthday to see both.</p>
+      <p>Vedic astrology reads your <strong>Moon sign</strong> first: it's the sign people mean in India when they say "my sign", and the one monthly horoscopes are written for. Add your birth time to find yours, along with your sidereal and tropical Sun signs.</p>
       <form class="finder-form" onsubmit="return false">
         <label for="bday">Your birthday</label>
-        <div class="finder-row"><input id="bday" type="date" min="1900-01-01" max="2030-12-31" required><button type="submit" id="bday-go">Show my signs</button></div>
+        <input id="bday" class="finder-input" type="date" min="1900-01-01" max="2030-12-31" required>
+        <div class="finder-two">
+          <div><label for="btime">Birth time <span class="opt">optional</span></label>
+          <input id="btime" class="finder-input" type="time"></div>
+          <div><label for="bzone">Born in time zone</label>
+          <select id="bzone" class="finder-input"></select></div>
+        </div>
+        <button type="submit" id="bday-go" class="finder-go">Show my signs</button>
       </form>
     </div>
-    <div class="finder-result" id="finder-result" aria-live="polite"><div class="placeholder"><span class="ph-cover"></span><span class="ph-cover"></span><p>Your sidereal and tropical signs, and the journal for each, show up here.</p></div></div>
+    <div class="finder-result" id="finder-result" aria-live="polite"><div class="placeholder"><span class="ph-cover"></span><span class="ph-cover"></span><p>Your sidereal Moon sign, your Sun signs, and the journal for each show up here.</p></div></div>
   </div>
   <script type="application/json" id="journal-data">[{"s": "Aries", "slug": "aries", "buy": "https://link.amazon/B082n6Gph"}, {"s": "Taurus", "slug": "taurus", "buy": "https://www.amazon.com/dp/B0C47R3HP2?tag=rogeniecord0c-20"}, {"s": "Gemini", "slug": "gemini", "buy": "https://www.amazon.com/dp/B0C47WF128?tag=rogeniecord0c-20"}, {"s": "Cancer", "slug": "cancer", "buy": "https://link.amazon/B0iXzlJkP"}, {"s": "Leo", "slug": "leo", "buy": "https://link.amazon/B0b3E9vR3"}, {"s": "Virgo", "slug": "virgo", "buy": "https://link.amazon/B07dZYWJq"}, {"s": "Libra", "slug": "libra", "buy": "https://www.amazon.com/dp/B0C47RV7MF?tag=rogeniecord0c-20"}, {"s": "Scorpio", "slug": "scorpio", "buy": "https://www.amazon.com/dp/B0C47TGW6W?tag=rogeniecord0c-20"}, {"s": "Sagittarius", "slug": "sagittarius", "buy": "https://link.amazon/B07UvWDyu"}, {"s": "Capricorn", "slug": "capricorn", "buy": "https://link.amazon/B0fu08QKH"}, {"s": "Aquarius", "slug": "aquarius", "buy": "https://link.amazon/B06aFYqqF"}, {"s": "Pisces", "slug": "pisces", "buy": "https://link.amazon/B0dnA7ePc"}]</script>
   <script src="/finder.js" defer></script>
@@ -67,7 +73,7 @@
 </section>
 <section class="latest" aria-labelledby="latest-h"><div class="wrap narrow">
     <h2 id="latest-h">Sidereal horoscopes and guides</h2>
-    <ul class="post-list"><li><a href="/guides/rahu-ketu-transit-2026-2028/">Rahu Ketu Transit 2026 to 2028: Rahu in Capricorn, Ketu in Cancer</a><span>Rahu enters sidereal Capricorn and Ketu enters Cancer on December 5, 2026, and they stay until June 23, 2028. Dates, eclipses and what it means for your sign.</span></li><li><a href="/sidereal-horoscope/virgo/december-2026/">Virgo Sidereal Horoscope December 2026: Vedic Monthly Forecast</a><span>Virgo, December 2026 moves Rahu into your 5th house, turns Saturn direct in your 7th and peaks your career at the Full Moon on December 23. Dates, love, work.</span></li></ul>
+    <ul class="post-list"><li><a href="/guides/rahu-ketu-transit-2026-2028/">Rahu Ketu Transit 2026 to 2028: Rahu in Capricorn, Ketu in Cancer</a><span>Rahu enters sidereal Capricorn and Ketu enters Cancer on December 5, 2026, and they stay until June 23, 2028. Dates, eclipses and what it means for your sign.</span></li><li><a href="/sidereal-horoscope/virgo/december-2026/">Virgo Moon Sign Horoscope December 2026: Vedic Forecast, November 22 to December 22</a><span>Virgo Moon, your next 30 days: Venus home in your 2nd, Rahu into your 5th on December 5, Saturn direct in your 7th on December 10. Dates, love, work.</span></li></ul>
     <p><a href="/sidereal-horoscope/">All sidereal horoscopes</a></p></div></section>
 <section class="inside" aria-labelledby="inside-h">
   <div class="wrap inside-inner">
@@ -90,8 +96,8 @@
     <h2 id="faq-h">Questions</h2>
     <h3>Is this a guided workbook?</h3>
     <p>No. Each page gives you one affirmation and room to write. No homework, no fill-in-the-blanks. The sign pages on this site give you a prompt if you want one.</p>
-    <h3>Should I get my tropical sign or my sidereal sign?</h3>
-    <p>Natal Notes reads the sky sidereally, so we'd start with your sidereal sign. But if your tropical sign is the one you've always recognized yourself in, that's the one to write with. Use the finder above to see both.</p>
+    <h3>Which sign's journal should I get?</h3>
+    <p>Natal Notes reads the sky sidereally, the Vedic way, where your Moon sign counts most, so that's a great place to start. But if your Sun sign is the one you've always recognized yourself in, write with that one. The finder above shows your Moon sign and both Sun signs.</p>
     <h3>Where do I buy it?</h3>
     <p>Every journal is printed and shipped by Amazon. The buttons on this site go straight to its Amazon page.</p>
     <h3>Will affirmations change my life?</h3>

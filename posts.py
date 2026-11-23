@@ -158,6 +158,8 @@ def check_post(p, sky):
     errs = []
     text = p["body"] + "\n" + "\n".join(f"{f['q']} {f['a']}" for f in p.get("faq", [])) + "\n" + p["description"]
     dates, degs, edges = sky_facts(sky, months_for(p, sky))
+    if p["kind"] == "forecast":
+        edges |= {d.isoformat() for d in window(p)}   # the forecast's own first and last day
     if p["kind"] in ("forecast", "overview") and p["month"] not in sky:
         errs.append(f"no sky data for {p['month']}: run python3 sky.py {p['month']}")
     base_year = int(p["month"][:4]) if p.get("month") else p["date"].year
@@ -233,17 +235,43 @@ def fmt_date(e):
     return f"{MONTHS[m - 1][:3]} {d}"
 
 
-def key_dates(sky_m, rising, esc):
+def window_events(sky, start, end):
+    """Every computed event dated start..end (inclusive), across month files."""
+    out = []
+    for d in sky.values():
+        out += [e for e in d["events"] if start.isoformat() <= e["date"] <= end.isoformat()]
+    return sorted(out, key=lambda e: e["jd"])
+
+
+def window(p):
+    """The dates a forecast covers: start/end in front matter, else its calendar month."""
+    if p.get("start") and p.get("end"):
+        s, e = p["start"], p["end"]
+        s = dt.date.fromisoformat(s) if isinstance(s, str) else s
+        e = dt.date.fromisoformat(e) if isinstance(e, str) else e
+        return s, e
+    y, m = map(int, p["month"].split("-"))
+    return dt.date(y, m, 1), dt.date(y + (m == 12), m % 12 + 1, 1) - dt.timedelta(days=1)
+
+
+def window_label(s, e):
+    if (s.year, s.month) == (e.year, e.month) and s.day == 1:
+        return f"{MONTHS[s.month - 1]} {s.year}"
+    left = f"{MONTHS[s.month - 1]} {s.day}" + (f", {s.year}" if s.year != e.year else "")
+    return f"{left} to {MONTHS[e.month - 1]} {e.day}, {e.year}"
+
+
+def key_dates(events, sign, esc):
     rows = []
-    for e in sky_m["events"]:
-        h = house_of(e["sign"], rising)
+    for e in events:
+        h = house_of(e["sign"], sign)
         where = f"{ordinal(h)} house: {HOUSE[h]}"
         if e["type"] == "opposition":
             h2 = (h + 5) % 12 + 1
             where = f"{ordinal(h)} and {ordinal(h2)} houses"
         rows.append(f"<tr><td>{fmt_date(e)}</td><td>{esc(describe(e))}</td><td>{esc(where)}</td></tr>")
     return ('<div class="table-wrap"><table class="sky"><thead><tr><th scope="col">Date (ET)</th>'
-            f'<th scope="col">What happens</th><th scope="col">For {esc(rising)} rising</th></tr></thead><tbody>'
+            f'<th scope="col">What happens</th><th scope="col">For a {esc(sign)} Moon</th></tr></thead><tbody>'
             + "".join(rows) + "</tbody></table></div>")
 
 
@@ -256,13 +284,13 @@ def all_dates(sky_m, esc):
 ORDER = ["Sun", "Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Rahu", "Ketu", "Uranus", "Neptune", "Pluto"]
 
 
-def positions_table(sky_m, esc, rising=None):
+def positions_table(positions, esc, rising=None, when="the start of the month"):
     head = '<th scope="col">Planet</th><th scope="col">Position</th><th scope="col">Nakshatra</th>'
     if rising:
-        head += f'<th scope="col">{esc(rising)} house</th>'
+        head += f'<th scope="col">House from {esc(rising)}</th>'
     rows = []
     for b in ORDER:
-        p = sky_m["positions_start"][b]
+        p = positions[b]
         r = " R" if p["retrograde"] else ""
         cells = f"<th scope=\"row\">{b}</th><td>{p['dms']} {p['sign']}{r}</td><td>{p['nakshatra']} {p['pada']}</td>"
         if rising:
@@ -270,7 +298,7 @@ def positions_table(sky_m, esc, rising=None):
         rows.append(f"<tr>{cells}</tr>")
     return ('<div class="table-wrap"><table class="sky"><thead><tr>' + head + "</tr></thead><tbody>"
             + "".join(rows) + "</tbody></table></div>"
-            + '<p class="table-note">Positions at the start of the month, sidereal (Lahiri). R means retrograde. Rahu and Ketu use the mean node.</p>')
+            + f'<p class="table-note">Positions at {when}, sidereal (Lahiri). R means retrograde. Rahu and Ketu use the mean node.</p>')
 
 
 def render_md(text):

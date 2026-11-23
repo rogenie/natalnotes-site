@@ -3,14 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>What&#x27;s my sidereal sign? Sidereal vs tropical zodiac | Natal Notes</title>
-<meta name="description" content="Find your sidereal sun sign from your birthday, see sidereal and tropical dates for all twelve signs, and learn why the two zodiacs differ by about 24 degrees.">
+<title>What&#x27;s my sidereal sign? Vedic Moon sign and Sun sign finder | Natal Notes</title>
+<meta name="description" content="Find your Vedic Moon sign and sidereal Sun sign from your birth date and time, see sidereal and tropical dates for every sign, and why Vedic astrology reads the Moon.">
 <link rel="canonical" href="https://mynatalnotes.com/sidereal-sign/">
 <meta name="theme-color" content="#050610">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Natal Notes">
-<meta property="og:title" content="What&#x27;s my sidereal sign? Sidereal vs tropical zodiac">
-<meta property="og:description" content="Find your sidereal sun sign from your birthday, see sidereal and tropical dates for all twelve signs, and learn why the two zodiacs differ by about 24 degrees.">
+<meta property="og:title" content="What&#x27;s my sidereal sign? Vedic Moon sign and Sun sign finder">
+<meta property="og:description" content="Find your Vedic Moon sign and sidereal Sun sign from your birth date and time, see sidereal and tropical dates for every sign, and why Vedic astrology reads the Moon.">
 <meta property="og:url" content="https://mynatalnotes.com/sidereal-sign/">
 <meta property="og:image" content="https://mynatalnotes.com/covers/scorpio.jpg">
 <meta name="twitter:card" content="summary_large_image">
@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="/style.css">
 <script data-goatcounter="https://mynatalnotes.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Natal Notes", "url": "https://mynatalnotes.com/", "slogan": "Your sign explains you. Your journal changes you.", "sameAs": ["https://www.tiktok.com/@natalnotes", "https://www.youtube.com/channel/UCrTdxWYXHs6xyHX8adUuMjQ", "https://www.facebook.com/845874061938683"]}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is a sidereal sign?", "acceptedAnswer": {"@type": "Answer", "text": "Your sidereal sign is the zodiac sign the Sun was in at your birth, measured against where the constellations actually sit in the sky, rather than against the seasons."}}, {"@type": "Question", "name": "Why is my sidereal sign different?", "acceptedAnswer": {"@type": "Answer", "text": "The tropical and sidereal zodiacs have drifted about 24 degrees apart because of the slow wobble of the Earth's axis, so most people's sidereal sign is the sign before their tropical one."}}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What is my Moon sign in Vedic astrology?", "acceptedAnswer": {"@type": "Answer", "text": "It's the sidereal sign the Moon was in when you were born. The Moon changes sign every two to two and a half days, so you need your birth time and time zone to be sure. Vedic astrology treats it as your main sign."}}, {"@type": "Question", "name": "What is a sidereal sign?", "acceptedAnswer": {"@type": "Answer", "text": "Your sidereal sign is the zodiac sign the Sun was in at your birth, measured against where the constellations actually sit in the sky, rather than against the seasons."}}, {"@type": "Question", "name": "Why is my sidereal sign different?", "acceptedAnswer": {"@type": "Answer", "text": "The tropical and sidereal zodiacs have drifted about 24 degrees apart because of the slow wobble of the Earth's axis, so most people's sidereal sign is the sign before their tropical one."}}]}</script>
 </head>
 <body>
 <header class="masthead">
@@ -35,21 +35,27 @@
 <div class="wrap narrow side-head">
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Natal Notes</a> / <span>Your real sign</span></nav>
   <h1>What's my sidereal sign?</h1>
-  <p class="lede">Your sidereal sun sign is usually the sign before the one you grew up with. Enter your birthday below to see your tropical and sidereal signs side by side.</p>
+  <p class="lede">In Vedic (sidereal) astrology, the sign that matters most is your Moon sign. Enter your birthday and birth time to find it, plus your sidereal Sun sign, which is usually the sign before the one you grew up with.</p>
 </div>
 
 <section class="finder" id="finder" aria-labelledby="finder-h">
   <div class="wrap finder-inner">
     <div class="finder-copy">
       <h2 id="finder-h">What's your real sign?</h2>
-      <p>Most horoscopes use the tropical zodiac, fixed to the seasons. Sidereal astrology uses where the
-      constellations actually sit in the sky today, about 24 degrees away. Enter your birthday to see both.</p>
+      <p>Vedic astrology reads your <strong>Moon sign</strong> first: it's the sign people mean in India when they say "my sign", and the one monthly horoscopes are written for. Add your birth time to find yours, along with your sidereal and tropical Sun signs.</p>
       <form class="finder-form" onsubmit="return false">
         <label for="bday">Your birthday</label>
-        <div class="finder-row"><input id="bday" type="date" min="1900-01-01" max="2030-12-31" required><button type="submit" id="bday-go">Show my signs</button></div>
+        <input id="bday" class="finder-input" type="date" min="1900-01-01" max="2030-12-31" required>
+        <div class="finder-two">
+          <div><label for="btime">Birth time <span class="opt">optional</span></label>
+          <input id="btime" class="finder-input" type="time"></div>
+          <div><label for="bzone">Born in time zone</label>
+          <select id="bzone" class="finder-input"></select></div>
+        </div>
+        <button type="submit" id="bday-go" class="finder-go">Show my signs</button>
       </form>
     </div>
-    <div class="finder-result" id="finder-result" aria-live="polite"><div class="placeholder"><span class="ph-cover"></span><span class="ph-cover"></span><p>Your sidereal and tropical signs, and the journal for each, show up here.</p></div></div>
+    <div class="finder-result" id="finder-result" aria-live="polite"><div class="placeholder"><span class="ph-cover"></span><span class="ph-cover"></span><p>Your sidereal Moon sign, your Sun signs, and the journal for each show up here.</p></div></div>
   </div>
   <script type="application/json" id="journal-data">[{"s": "Aries", "slug": "aries", "buy": "https://link.amazon/B082n6Gph"}, {"s": "Taurus", "slug": "taurus", "buy": "https://www.amazon.com/dp/B0C47R3HP2?tag=rogeniecord0c-20"}, {"s": "Gemini", "slug": "gemini", "buy": "https://www.amazon.com/dp/B0C47WF128?tag=rogeniecord0c-20"}, {"s": "Cancer", "slug": "cancer", "buy": "https://link.amazon/B0iXzlJkP"}, {"s": "Leo", "slug": "leo", "buy": "https://link.amazon/B0b3E9vR3"}, {"s": "Virgo", "slug": "virgo", "buy": "https://link.amazon/B07dZYWJq"}, {"s": "Libra", "slug": "libra", "buy": "https://www.amazon.com/dp/B0C47RV7MF?tag=rogeniecord0c-20"}, {"s": "Scorpio", "slug": "scorpio", "buy": "https://www.amazon.com/dp/B0C47TGW6W?tag=rogeniecord0c-20"}, {"s": "Sagittarius", "slug": "sagittarius", "buy": "https://link.amazon/B07UvWDyu"}, {"s": "Capricorn", "slug": "capricorn", "buy": "https://link.amazon/B0fu08QKH"}, {"s": "Aquarius", "slug": "aquarius", "buy": "https://link.amazon/B06aFYqqF"}, {"s": "Pisces", "slug": "pisces", "buy": "https://link.amazon/B0dnA7ePc"}]</script>
   <script src="/finder.js" defer></script>
@@ -61,7 +67,9 @@
   <h2>Sidereal and tropical dates for every sign</h2>
   <div class="table-wrap"><table class="dates"><thead><tr><th scope="col">Sign</th><th scope="col">Tropical</th><th scope="col">Sidereal</th></tr></thead><tbody><tr><th scope="row"><a href="/journals/aries/">Aries</a></th><td>Mar 21 – Apr 19</td><td>Apr 14 – May 14</td></tr><tr><th scope="row"><a href="/journals/taurus/">Taurus</a></th><td>Apr 20 – May 20</td><td>May 15 – Jun 14</td></tr><tr><th scope="row"><a href="/journals/gemini/">Gemini</a></th><td>May 21 – Jun 20</td><td>Jun 15 – Jul 15</td></tr><tr><th scope="row"><a href="/journals/cancer/">Cancer</a></th><td>Jun 21 – Jul 22</td><td>Jul 16 – Aug 16</td></tr><tr><th scope="row"><a href="/journals/leo/">Leo</a></th><td>Jul 23 – Aug 22</td><td>Aug 17 – Sep 16</td></tr><tr><th scope="row"><a href="/journals/virgo/">Virgo</a></th><td>Aug 23 – Sep 22</td><td>Sep 17 – Oct 16</td></tr><tr><th scope="row"><a href="/journals/libra/">Libra</a></th><td>Sep 23 – Oct 22</td><td>Oct 17 – Nov 15</td></tr><tr><th scope="row"><a href="/journals/scorpio/">Scorpio</a></th><td>Oct 23 – Nov 21</td><td>Nov 16 – Dec 15</td></tr><tr><th scope="row"><a href="/journals/sagittarius/">Sagittarius</a></th><td>Nov 22 – Dec 21</td><td>Dec 16 – Jan 13</td></tr><tr><th scope="row"><a href="/journals/capricorn/">Capricorn</a></th><td>Dec 22 – Jan 19</td><td>Jan 14 – Feb 12</td></tr><tr><th scope="row"><a href="/journals/aquarius/">Aquarius</a></th><td>Jan 20 – Feb 18</td><td>Feb 13 – Mar 13</td></tr><tr><th scope="row"><a href="/journals/pisces/">Pisces</a></th><td>Feb 19 – Mar 20</td><td>Mar 14 – Apr 13</td></tr></tbody></table></div>
   <p class="date-note">Dates are approximate and shift by a day or so from year to year. Born within a day of a change? Your birth time decides it, so check a full birth chart.</p>
-  <h2>Which one is right?</h2>
+  <h2>Why does Vedic astrology use the Moon sign?</h2>
+  <p>In Vedic astrology the Moon stands for the mind, so your Moon sign (your rashi) is how you feel and react day to day. It's what people in India usually mean by "my sign", monthly horoscopes there are written by Moon sign, and transits are traditionally counted from the natal Moon. Your rising sign is the foundation of the whole birth chart, and the Sun sign matters least. Our <a href="/sidereal-horoscope/">monthly horoscopes</a> are written for your Moon sign first and your rising sign second.</p>
+  <h2>Which zodiac is right?</h2>
   <p>Both are real systems with long histories, and astrologers disagree about which to use. We read the sky sidereally, and our monthly forecasts use the sidereal zodiac. Use the sign that helps you see yourself more clearly.</p>
 </div>
 </main>

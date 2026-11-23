@@ -13,7 +13,8 @@ Static site for mynatalnotes.com, served by GitHub Pages from `docs/` on `main`.
 ## Brand
 - Reader: women 22-40 who know their sun, moon and rising and want depth, not fluff.
 - Voice: a sharp, warm friend who knows the sky. Direct, specific, never vague, never doom.
-- Sidereal (Vedic) only. Read by rising sign first, then moon sign. Byline: the Natal Notes team.
+- Sidereal (Vedic) only. Forecasts are written for the **Moon sign (rashi) first**, the way Vedic astrology reads
+  transits (gochara is counted from the natal Moon; Sade Sati too), and for the rising sign second. Byline: the Natal Notes team.
 
 ## Accuracy (the build enforces this; do not work around it)
 - Every date, degree, nakshatra, retrograde and house must come from `sky.py` output. Never from memory,
@@ -31,15 +32,24 @@ Static site for mynatalnotes.com, served by GitHub Pages from `docs/` on `main`.
 - Joni Patry and other astrologers are a depth benchmark only. Never copy or paraphrase their text.
 
 ## Monthly forecast (kind: forecast) — the core product
-Title: `<Sign> Sidereal Horoscope <Month Year>: Vedic Monthly Forecast`.
+Title: `<Sign> Moon Sign Horoscope <Month Year>: Sidereal Vedic Forecast`.
+A forecast covers its calendar month by default. Only if Rogenie asks for a custom window, set `start:` and `end:`
+in the front matter (the tables follow the window automatically) and put the dates in the title.
 Description: 120-165 characters, the month's headline for that sign.
 1,100-1,600 words (build allows 900-1,900). Structure:
-1. Bold first paragraph, 40-60 words: the month's headline for this rising sign, naming the 1-2 biggest transits and their houses.
-2. `## What's the big picture for <Sign> rising in <Month>?` Saturn, Jupiter, Rahu/Ketu: house, nakshatra, retrograde, which of your houses they aspect.
+1. Bold first paragraph, 40-60 words: the month's headline for this Moon sign, naming the 1-2 biggest transits and their houses.
+   Then one line: the window dates, "counted from a <Sign> Moon", read again from your ascendant if you have <Sign> rising,
+   and a link to /sidereal-sign/ to find your Moon sign.
+2. `## What's the big picture for a <Sign> Moon right now?` Saturn, Jupiter, Rahu/Ketu: house from the Moon, nakshatra,
+   retrograde, aspects, and whether Sade Sati applies (Saturn in the 12th, 1st or 2nd from the Moon). Classical gochara
+   notes are welcome where they fit (e.g. the Sun in the 3rd, 6th, 10th or 11th from the Moon is favourable).
 3. One H2 per major event of the month in date order (stations, ingresses of Sun/Mercury/Venus/Mars/Jupiter/Saturn, eclipses, New and Full Moon, tight conjunctions). Each gives date, degree, nakshatra, the house for this sign, and what it means in plain life terms: work, money, love, home, health habits. Phrase H2s as questions readers ask ("What does Mars retrograde in Leo mean for Scorpio?").
 4. `## Love and relationships`, `## Career and money` short sections pulled from Venus, Mars, Jupiter, 5th/7th/10th/11th houses.
 5. `## Best days and slow days` from the events.
-6. A `<div class="practice" markdown="1">` with `### Write this month`: one journal prompt tied to the month's main transit.
+6. A `<div class="practice" markdown="1">` with `### Write this month`: journal prompts for the window's New and Full Moon
+   (people search "<sign> new moon / full moon journal prompts"), and the sign's affirmation from journals.yml, word for word.
+7. Journal links: a link and a `{{buy}}` box right after the opening, a `{{buy}}` box mid-article, an inline link where
+   journaling comes up naturally, and a closing "Write <Month> down" section with a link and `{{buy}}`.
 The page adds the key-dates table, planet table, journal box, FAQ, and links automatically. 3-5 FAQ entries,
 each a different follow-up ("Is January 2027 a good month for <Sign> to change jobs?").
 

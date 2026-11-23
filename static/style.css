@@ -286,3 +286,20 @@ p { margin: 0 0 1em; }
 .cta-cover { border-radius: 3px; box-shadow: 0 8px 18px rgba(0,0,0,.5); }
 .cta-inline p { margin: 0 0 10px; font-size: .95rem; color: var(--body); }
 .cta-inline .buy { padding: 9px 18px; font-size: .9rem; box-shadow: none; }
+
+/* Finder with Moon sign */
+.finder-input { width: 100%; min-width: 0; font: 500 1rem var(--sans); color: var(--white); background: var(--night); border: 1px solid rgba(140,190,255,.35); border-radius: 12px; padding: 12px 14px; color-scheme: dark; }
+.finder-input:focus { border-color: var(--pink); outline: none; box-shadow: 0 0 0 3px var(--pink-soft); }
+select.finder-input { appearance: none; padding-right: 34px; background-image: linear-gradient(45deg, transparent 50%, var(--star) 50%), linear-gradient(135deg, var(--star) 50%, transparent 50%); background-position: calc(100% - 18px) 55%, calc(100% - 13px) 55%; background-size: 5px 5px; background-repeat: no-repeat; }
+.finder-two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.finder-two label { margin-top: 14px; }
+.opt { color: var(--soft); font-weight: 400; font-size: .85rem; }
+.finder-go { margin-top: 18px; width: 100%; font: 600 1rem var(--sans); background: var(--pink); color: #14041a; border: 0; border-radius: 12px; padding: 13px 20px; cursor: pointer; box-shadow: 0 0 20px rgba(255,92,170,.4); }
+.finder-go:hover { box-shadow: 0 0 30px rgba(255,92,170,.6); }
+.result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.result-grid > :first-child { grid-column: 1 / -1; }
+.result-card.main { border-color: rgba(255,92,170,.6); box-shadow: 0 0 30px rgba(255,92,170,.18); }
+.result-note { background: rgba(5,6,16,.55); border: 1px solid rgba(255,92,170,.6); border-radius: 14px; padding: 14px 16px; }
+.result-note p:last-child { margin: 0; }
+.result-foot { font-size: .84rem; color: var(--soft); margin: 14px 0 0; }
+@media (max-width: 600px) { .finder-two, .result-grid { grid-template-columns: 1fr; } }
