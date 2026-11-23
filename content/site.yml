@@ -1,0 +1,22 @@
+name: Natal Notes
+url: https://mynatalnotes.com
+custom_domain: mynatalnotes.com
+tagline: I don't chase, I attract
+promise: Your sign explains you. Your journal changes you.
+description: "Natal Notes Daily Journals: twelve hardcover journals, one for every zodiac sign, with an affirmation on every page. Find your real sidereal sign and the journal made for it."
+associates_disclosure: "As an Amazon Associate, Natal Notes earns from qualifying purchases."
+# GoatCounter site code (leave blank to skip visit tracking).
+goatcounter: "mynatalnotes"
+# From the natalnotes brand in Metricool. Confirm the TikTok handle.
+socials:
+  - {name: TikTok, url: "https://www.tiktok.com/@natalnotes"}
+  - {name: YouTube, url: "https://www.youtube.com/channel/UCrTdxWYXHs6xyHX8adUuMjQ"}
+  - {name: Facebook, url: "https://www.facebook.com/845874061938683"}
+# Shown on the home page as real pages from the journal (copied word for word).
+sample_affirmations:
+  - I am capable of anything.
+  - I powerfully attract what I want
+  - Every day is another opportunity to grow
+  - I am taking my power back
+  - I deserve a love that makes me feel happy, not insecure
+  - Today is the beginning of whatever I want.
