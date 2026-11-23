@@ -554,6 +554,18 @@ def build_files():
 
 def build():
     errs = [e for p in POSTS for e in P.check_post(p, SKY)]
+    # Every buy link must carry the Associates tag: a link.amazon short link (tag added on redirect)
+    # or an amazon.com link with tag=rogeniecord0c-20. Article links must match journals.yml exactly.
+    TAG = "tag=rogeniecord0c-20"
+    for j in J:
+        if not (j["buy"].startswith("https://link.amazon/") or TAG in j["buy"]):
+            errs.append(f"journals.yml: {j['sign']} buy link has no affiliate tag: {j['buy']}")
+    allowed = {j["buy"] for j in J}
+    import re as _re
+    for p in POSTS:
+        for u in _re.findall(r"https?://(?:link\.amazon|(?:www\.)?amazon\.[a-z.]+|amzn\.to)[^\s)\]\"']*", p["body"]):
+            if u not in allowed:
+                errs.append(f"{p['file']}: Amazon link isn't one of the journal affiliate links: {u}")
     if errs:
         raise SystemExit("Post check failed:\n  " + "\n  ".join(errs))
     if OUT.exists():
